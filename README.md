@@ -1,0 +1,1 @@
+Repository for aggregating LinkedIn data for a trivia game.
