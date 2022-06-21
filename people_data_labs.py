@@ -52,8 +52,13 @@ def get_bulk_person_data(data):
     ).json()
 
 
-def save_responses_to_files(input_file, out_folder):
-    """Parse the responses and save to a set of json files."""
+def get_linkedin_data(input_file, out_folder):
+    """
+    Parse the responses and save to a set of json files.
+    
+    Example:
+    `get_linkedin_data("data/profile_urls.csv","./data/output")`
+    """
     data = read_linkedin_profiles(input_file)
 
     for response in get_bulk_person_data(data):
@@ -64,4 +69,4 @@ def save_responses_to_files(input_file, out_folder):
             with open(out_file, 'w') as f:
                 json.dump(record, f)
         else:
-            print("Bulk Person Enrichment Error:", response)
+            print("Bulk Person Enrichment Error:", linkedin_username, response)
