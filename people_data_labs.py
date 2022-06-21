@@ -70,3 +70,15 @@ def get_linkedin_data(input_file, out_folder):
                 json.dump(record, f)
         else:
             print("Bulk Person Enrichment Error:", linkedin_username, response)
+
+
+def convert_json_to_csv(input_folder, out_folder):
+    """Converts json files to csv to ease importing into duckdb"""
+    with open(os.path.join(out_folder, "linkedin.csv"), "w", newline='', encoding="utf-8-sig") as out_file:
+        csv_writer = csv.writer(out_file, delimiter = '\t')
+        for idx, filename in enumerate(os.listdir(input_folder)):
+            with open(os.path.join(input_folder, filename)) as f:
+                data = json.load(f)
+                if idx == 0:
+                    csv_writer.writerow(data.keys())
+                csv_writer.writerow(data.values())
